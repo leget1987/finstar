@@ -221,5 +221,5 @@ fabric.properties
 
 tmp
 .secrets
-../.idea/
+.idea
 # <--- geekshop

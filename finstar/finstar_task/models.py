@@ -16,7 +16,7 @@ class Shop(models.Model):
 
 class Receipt(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    shop = models.ForeignKey(to=Shop, on_delete=models.CASCADE, verbose_name='Магазин')
+    shop = models.ForeignKey(to=Shop, on_delete=models.CASCADE, verbose_name='Магазин', related_name='receipt')
     number_receipt = models.PositiveSmallIntegerField()
     time_issuance = models.TimeField(default=datetime.time)
     sum_receipt = models.FloatField()

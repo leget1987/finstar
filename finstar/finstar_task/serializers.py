@@ -33,7 +33,6 @@ class ReceiptSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-
     receipt = ReceiptSerializer()
 
     class Meta:
@@ -47,3 +46,20 @@ class ProductSerializer(serializers.ModelSerializer):
         )
 
 
+class UserShopViewSerializer(serializers.ModelSerializer):
+    shop = ShopSerializer()
+
+    class Meta:
+        model = Receipt
+        fields = (
+            'shop',
+        )
+
+
+class ProductForUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = (
+            'name',
+        )

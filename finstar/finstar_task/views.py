@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from django.db.models import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from jsonschema import validate, exceptions
+from rest_framework import status
 
 from finstar_task.filters import ProductFilter, ReceiptFilter
 from finstar_task.serializers import *
@@ -54,7 +55,8 @@ def create_receipt(request):
                                price=request['product']['price'])
         return Response(data='all right')
     except exceptions.ValidationError:
-        return Response(data=f'Неверный формат данных, схема данных данных:{schema}')
+        return Response(data=f'Неверный формат данных, схема данных данных:{schema}',
+                        status=status.HTTP_400_BAD_REQUEST)
 
 
 class ReceiptView(viewsets.ModelViewSet):
@@ -84,6 +86,9 @@ class ReceiptView(viewsets.ModelViewSet):
         elif isinstance(request.data, list):
             for i in request.data:
                 result = create_receipt(i)
+                if result.status_code == status.HTTP_400_BAD_REQUEST:
+                    result.data = f'Чек {i} и следующие после него не записались, неверный форма'
+                    break
         else:
             return Response(data=f'Неверный формат данных')
         return result

@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -24,8 +25,8 @@ class Receipt(models.Model):
     user = models.ForeignKey(to=Consumer, on_delete=models.CASCADE)
     shop = models.ForeignKey(to=Shop, on_delete=models.CASCADE, verbose_name='Магазин', related_name='receipt')
     number_receipt = models.PositiveSmallIntegerField()
-    time_issuance = models.TimeField(default=datetime.time)
-    date_issuance = models.DateField(default=datetime.date.today())
+    time_issuance = models.TimeField(default=timezone.now)
+    date_issuance = models.DateField(default=timezone.now)
     sum_receipt = models.FloatField()
 
     def __str__(self):

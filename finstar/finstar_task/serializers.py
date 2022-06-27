@@ -1,17 +1,14 @@
 from rest_framework import serializers
 from finstar_task.models import *
-from django.contrib.auth.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = User
-        fields = ('id', 'username',)
+        model = Consumer
+        fields = ('id', 'name',)
 
 
 class ShopSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Shop
         fields = ('id', 'name',)
@@ -29,6 +26,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
             'number_receipt',
             'time_issuance',
             'sum_receipt',
+            'date_issuance'
         )
 
 
@@ -57,9 +55,19 @@ class UserShopViewSerializer(serializers.ModelSerializer):
 
 
 class ProductForUserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Product
         fields = (
             'name',
+        )
+
+
+class ReceiptListSerializer(serializers.ModelSerializer):
+    products = ProductForUserSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Receipt
+        fields = (
+            'number_receipt',
+            'products'
         )

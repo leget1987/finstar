@@ -110,7 +110,7 @@ class ShopView(viewsets.ModelViewSet):
 
 class UserShopView(viewsets.ModelViewSet):
     renderer_classes = [JSONRenderer]
-    queryset = Receipt.objects.all()
+    queryset = Receipt.objects.all().distinct('shop__id')
     serializer_class = UserShopViewSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ReceiptFilter

@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from finstar_task.models import *
+from finstar_task.models import Product, Receipt
 
 
 class ProductFilter(filters.FilterSet):

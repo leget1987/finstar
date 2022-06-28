@@ -222,5 +222,4 @@ fabric.properties
 tmp
 .secrets
 .idea
-secrets.py
 # <--- geekshop

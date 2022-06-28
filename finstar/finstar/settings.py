@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from .secrets import DJANGO_SECRET_KEY
+from .secrets import DJANGO_SECRET_KEY, DATABASE
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,17 +79,7 @@ WSGI_APPLICATION = 'finstar.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'finstar',
-    'USER': 'admin',
-    'PASSWORD': 'admin',
-    'HOST': 'db', # Set to empty string for localhost.
-    # 'HOST': '0.0.0.0', # Set to empty string for localhost.
-    'PORT': '5432', # Set to empty string for default.
-    }
-}
+DATABASES = DATABASE
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
